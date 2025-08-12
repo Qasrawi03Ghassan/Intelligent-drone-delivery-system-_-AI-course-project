@@ -18,6 +18,7 @@ public class MainController {
 
     @FXML private TextField xField, yField, tempField, humField, windField;
      @FXML private  TextArea  CostFiled;
+    @FXML private  TextArea  CostFiled1;
 @FXML private AnchorPane Page2;
 
     @FXML private TableView<City> table;
@@ -25,7 +26,6 @@ public class MainController {
     @FXML private TableColumn<City, Double> xCol, yCol, tCol, hCol, wCol;
     @FXML private TableColumn<City, String> sCol;
     @FXML private Pane startPage;
-
     @FXML private Canvas canvas;
 
     private final ObservableList<City> cities = FXCollections.observableArrayList();
@@ -94,6 +94,7 @@ public class MainController {
         redraw();
     }
 
+
     @FXML
     private void onClear() {
         cities.clear();
@@ -150,4 +151,26 @@ public class MainController {
         startPage.setVisible(false);
             Page2.setVisible(true);
        }
+
+@FXML
+    private void onOptimizeRoute() {
+        if (cities.size() < 2) return;
+
+
+        for (City c: cities)
+            c.safeToFly = p.predict(new double[]{c.temperature, c.humidity, c.windSpeed});
+
+        int iterMax = 20000;
+        double T0 = 150.0;
+        double alpha = 0.995;
+        double penalty = 50.0; boolean closeLoop = true;
+
+        var res = SimulatedAnnealing.optimize(cities, iterMax, T0, alpha, penalty, closeLoop, new java.util.Random());
+
+        CostFiled1.setText(String.format("%.2f",res.bestCost));
+
+    }
+
+
+
 }

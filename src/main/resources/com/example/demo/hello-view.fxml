@@ -18,6 +18,18 @@
 
    <!-- شريط الإدخال: GridPane بدل VBox/HBox -->
    <children>
+      <TextArea fx:id="CostFiled1" editable="false" layoutX="996.0" layoutY="736.0" prefHeight="35.0" prefWidth="84.0" />
+      <Label layoutX="594.0" layoutY="719.0" prefHeight="64.0" prefWidth="146.0" text="Before optimization" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Al-HadariBold" size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="842.0" layoutY="719.0" prefHeight="64.0" prefWidth="146.0" text=" after optimization" textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Al-HadariBold" size="19.0" />
+         </font>
+      </Label>
+      <Button layoutX="858.0" layoutY="37.0" onAction="#onOptimizeRoute" styleClass="my-button" stylesheets="@../../../style.css" text="optimize" />
 
       <!-- العنوان -->
       <Label layoutX="15.0" layoutY="14.0" style="-fx-text-fill:white; -fx-font-size:24px; -fx-font-weight:bold;" text="Intelligent Delivery Drone Planner" />
@@ -39,11 +51,11 @@
       <TextField fx:id="windField" layoutX="471.0" layoutY="61.0" prefWidth="70" />
 
       <Button layoutX="630.0" layoutY="37.0" onAction="#onAddCity" styleClass="my-button" stylesheets="@../../../style.css" text="Add City" />
-      <Button layoutX="772.0" layoutY="37.0" onAction="#onPredictSafety" styleClass="my-button" stylesheets="@../../../style.css" text="Predict" />
-      <Button layoutX="911.0" layoutY="37.0" onAction="#onClear" styleClass="my-button" stylesheets="@../../../style.css" text="Clear" />
+      <Button layoutX="740.0" layoutY="37.0" onAction="#onPredictSafety" styleClass="my-button" stylesheets="@../../../style.css" text="Predict" />
+      <Button layoutX="974.0" layoutY="37.0" onAction="#onClear" styleClass="my-button" stylesheets="@../../../style.css" text="Clear" />
 
       <!-- الجدول يسار -->
-      <TableView fx:id="table" layoutX="10" layoutY="120" prefHeight="647.0" prefWidth="614.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="120.0">
+      <TableView fx:id="table" layoutX="10" layoutY="119.0" prefHeight="648.0" prefWidth="584.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="119.0">
          <columns>
             <TableColumn fx:id="idCol" prefWidth="60" text="ID" />
             <TableColumn prefWidth="80" text="X" fx:id="xCol" />
@@ -58,14 +70,14 @@
       <!-- اللوحة والـCost يمين -->
       <Label layoutX="660.0" layoutY="120.0" text="Map" textFill="WHITE" />
 
-      <Canvas fx:id="canvas" height="520.0" layoutX="660.0" layoutY="150.0" width="420.0" />
+      <Canvas fx:id="canvas" height="467.0" layoutX="660.0" layoutY="150.0" width="420.0" />
 
-      <Label layoutX="660.0" layoutY="680.0" text="Total cost" textFill="WHITE">
+      <Label layoutX="811.0" layoutY="624.0" text="Total cost" textFill="WHITE">
          <font><Font name="Al-HadariBold" size="21.0" /></font>
       </Label>
 
-      <TextArea fx:id="CostFiled" layoutX="660.0" layoutY="710.0" prefHeight="60.0" prefWidth="420.0" />
-      <Pane fx:id="startPage" prefHeight="818.0" prefWidth="1110.0" style="-fx-background-color: #1a5480;">
+      <TextArea fx:id="CostFiled" editable="false" layoutX="740.0" layoutY="734.0" prefHeight="41.0" prefWidth="84.0" />
+      <Pane fx:id="startPage" prefHeight="818.0" prefWidth="1110.0" style="-fx-background-color: #1a5480;" visible="false">
          <children>
             <ImageView fitHeight="355.0" fitWidth="564.0" layoutX="282.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
                <image>
