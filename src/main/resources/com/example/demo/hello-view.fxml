@@ -55,7 +55,7 @@
       <Button layoutX="974.0" layoutY="37.0" onAction="#onClear" styleClass="my-button" stylesheets="@../../../style.css" text="Clear" />
 
       <!-- الجدول يسار -->
-      <TableView fx:id="table" layoutX="10" layoutY="119.0" prefHeight="648.0" prefWidth="584.0" AnchorPane.bottomAnchor="51.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="119.0">
+      <TableView fx:id="table" layoutX="10" layoutY="119.0" prefHeight="517.0" prefWidth="584.0" AnchorPane.bottomAnchor="182.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="119.0">
          <columns>
             <TableColumn fx:id="idCol" prefWidth="60" text="ID" />
             <TableColumn prefWidth="80" text="X" fx:id="xCol" />
@@ -72,7 +72,7 @@
 
       <Canvas fx:id="canvas" height="467.0" layoutX="660.0" layoutY="150.0" width="420.0" />
 
-      <Label layoutX="811.0" layoutY="624.0" text="Total cost" textFill="WHITE">
+      <Label layoutX="823.0" layoutY="663.0" text="Total cost" textFill="WHITE">
          <font><Font name="Al-HadariBold" size="21.0" /></font>
       </Label>
 
@@ -103,5 +103,11 @@
             </Button>
          </children>
       </Pane>
+      <Label layoutX="380.0" layoutY="719.0" prefHeight="64.0" prefWidth="95.0" text="Accuracy " textAlignment="CENTER" textFill="WHITE" textOverrun="WORD_ELLIPSIS" wrapText="true">
+         <font>
+            <Font name="Al-HadariBold" size="19.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="AccuracyFiled" editable="false" layoutX="480.0" layoutY="731.0" prefHeight="41.0" prefWidth="84.0" />
    </children>
 </AnchorPane>

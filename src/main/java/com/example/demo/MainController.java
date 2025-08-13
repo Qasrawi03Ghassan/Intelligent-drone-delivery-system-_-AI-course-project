@@ -17,7 +17,7 @@ public class MainController {
 
 
     @FXML private TextField xField, yField, tempField, humField, windField;
-     @FXML private  TextArea  CostFiled;
+     @FXML private  TextArea  CostFiled,AccuracyFiled;
     @FXML private  TextArea  CostFiled1;
 @FXML private AnchorPane Page2;
 
@@ -45,14 +45,49 @@ public class MainController {
         hCol.setCellValueFactory(new PropertyValueFactory<>("humidity"));
         wCol.setCellValueFactory(new PropertyValueFactory<>("windSpeed"));
         sCol.setCellValueFactory(new PropertyValueFactory<>("safeLabel"));
-
         table.setItems(cities);
-
         table.refresh();
-        CostFiled.setText("");
         try {
+            // Data Train and  separation
+
             WeatherDatasetLoader.load("src/main/resources/weather_data.csv");
-            p.train(WeatherDatasetLoader.features, WeatherDatasetLoader.labels, 1800);
+            double[][] X = WeatherDatasetLoader.features;
+            int[] y       = WeatherDatasetLoader.labels;
+            int n = X.length;
+
+
+            java.util.List<Integer> idx = new java.util.ArrayList<>();
+            for (int i = 0; i < n; i++) idx.add(i);
+            java.util.Collections.shuffle(idx, new java.util.Random(42));
+
+
+            int trainSize = (int) Math.round(n * 0.7);
+
+
+            double[][] Xtr = new double[trainSize][];
+            int[]      ytr = new int[trainSize];
+            double[][] Xte = new double[n - trainSize][];
+            int[]      yte = new int[n - trainSize];
+
+            for (int i = 0; i < trainSize; i++) {
+                int id = idx.get(i);
+                Xtr[i] = X[id];
+                ytr[i] = y[id];
+            }
+            for (int i = trainSize; i < n; i++) {
+                int id = idx.get(i);
+                Xte[i - trainSize] = X[id];
+                yte[i - trainSize] = y[id];
+            }
+
+
+            p.train(Xtr, ytr, 1000);
+
+
+            double acc = calcAccuracy(p, Xte, yte);
+            System.out.printf("Test Accuracy = %.2f%%%n", acc);
+
+
         } catch (Exception ex) {
             showError("Training Error", ex.getMessage());
         }
@@ -75,7 +110,7 @@ public class MainController {
             redraw();
             clearInputs(false);
         } catch (Exception e) {
-            showError("Input Error", "تأكد من إدخال أرقام صحيحة لكل الحقول.");
+            showError("Input Error", "make sure enter all fields.");
         }
     }
 
@@ -92,7 +127,18 @@ public class MainController {
         setCostValue(cost);
         table.refresh();
         redraw();
+
     }
+
+
+    private static double calcAccuracy(Perceptron p, double[][] X, int[] y) {
+        int correct = 0;
+        for (int i = 0; i < X.length; i++) {
+            if (p.predict(X[i]) == y[i]) correct++;
+        }
+        return X.length == 0 ? 0.0 : (correct * 100.0) / X.length;
+    }
+
 
 
     @FXML
