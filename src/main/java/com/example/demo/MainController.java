@@ -144,24 +144,6 @@ public class MainController {
                 }
             }
 
-
-
-
-//            for(int i=0;i<citiesNum;i++){
-//                int x = rand.nextInt(maxXY - minXY + 1) + minXY;
-//                int y = rand.nextInt(maxXY - minXY + 1) + minXY;
-//
-//                double temp = 5.0 + 45.0 * rand.nextDouble(); // Random temp for each city between 5 and 50 degrees
-//                double hum = 100 * rand.nextDouble(); // Random humidity double between 0 and 100 for each city
-//                double wind = 100 * rand.nextDouble(); // Random wind double between 0 and 100 for each city
-//
-//                temp = Math.round(temp * 100.0) / 100.0;
-//                hum = Math.round(hum * 100.0) / 100.0;
-//                wind = Math.round(wind * 100.0) / 100.0;
-//
-//                randCities[i] = new City(nextId++,x,y,temp,hum,wind);
-//                cities.add(randCities[i]);
-//            }
             table.refresh();
             redraw();
             randomCitiesNumberField.clear();
@@ -235,18 +217,18 @@ public class MainController {
     private void drawRandomRoute(GraphicsContext g, List<double[]> points, boolean closeLoop) {
         if (points.size() < 2) return;
 
-        // Create a list of indices instead of points
+
         List<Integer> indices = new ArrayList<>();
         for (int i = 0; i < points.size(); i++) indices.add(i);
 
-        // Shuffle indices to create a random route
+
         java.util.Collections.shuffle(indices);
 
         g.setStroke(Color.GRAY);
         g.setLineWidth(2);
         double radius = 12; // point radius
 
-        // Draw lines between cities along the random route
+
         for (int i = 0; i < indices.size() - 1; i++) {
             double[] from = points.get(indices.get(i));
             double[] to = points.get(indices.get(i + 1));
@@ -261,7 +243,7 @@ public class MainController {
                     to[0] - offsetX, to[1] - offsetY);
         }
 
-        // Optional: close the loop
+
         if (closeLoop) {
             double[] last = points.get(indices.get(indices.size() - 1));
             double[] first = points.get(indices.get(0));
@@ -280,7 +262,7 @@ public class MainController {
     private void drawBestRoute(GraphicsContext g, List<double[]> points, boolean closeLoop) {
         if (points.size() < 2) return;
 
-        // Create a list of indices instead of points
+
         List<Integer> indices = new ArrayList<>();
         for (int i = 0; i < points.size(); i++) indices.add(i);
 
@@ -294,7 +276,6 @@ public class MainController {
         g.setLineWidth(2);
         double radius = 12; // point radius
 
-        // Draw lines between cities along the random route
         for (int i = 0; i < indices.size() - 1; i++) {
             double[] from = points.get(indices.get(i));
             double[] to = points.get(indices.get(i + 1));
@@ -309,7 +290,6 @@ public class MainController {
                     to[0] - offsetX, to[1] - offsetY);
         }
 
-        // Optional: close the loop
         if (closeLoop) {
             double[] last = points.get(indices.get(indices.size() - 1));
             double[] first = points.get(indices.get(0));
