@@ -290,7 +290,7 @@ public class MainController {
         }
         indices = bestRoute;
 
-        g.setStroke(Color.GRAY);
+        g.setStroke(Color.YELLOW);
         g.setLineWidth(2);
         double radius = 12; // point radius
 
