@@ -14,7 +14,7 @@ public class Perceptron {
     public void train(double[][] x, int[] y, int epochs) {
       Random random = new Random();
         for (int i = 0; i < 3; i++) {
-        w[i] = random.nextDouble() - 0.5; ;
+        w[i] = random.nextDouble() - 0.5;
         }
         for (int e = 0; e < epochs; e++) {
 
